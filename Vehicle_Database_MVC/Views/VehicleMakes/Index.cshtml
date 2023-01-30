@@ -1,0 +1,92 @@
+﻿@*@model List<Vehicle_Database_MVC.Models.Domain.VehicleMake>
+
+@{
+}
+
+<h1>Vehicle Makes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Vehicle Name</th>
+            <th>Vehicle Abbreviation</th>
+            <th> </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach(var vehicle in Model)
+        {
+            <tr>
+                <td> @vehicle.Id</td>
+                <td> @vehicle.VehicleName</td>
+                <td> @vehicle.VehicleAbrv</td>
+                <td><a href="VehicleMakes/View/@vehicle.Id">View</a> </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>*@
+
+@model CombinedViewModel
+@{
+}
+
+<h1>Vehicle Makes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Vehicle Name</th>
+            <th>Vehicle Abbreviation</th>
+            <th> </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model.vehicleMakes)
+        {
+            <tr>
+                <td> @vehicle.Id</td>
+                <td> @vehicle.VehicleName</td>
+                <td> @vehicle.VehicleAbrv</td>
+                <td><a href="VehicleMakes/View/@vehicle.Id">View</a> </td>
+            </tr>
+        }
+    </tbody>
+
+    </table>
+
+    <h1>Vehicle Models</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Make Id</th>
+            <th>Vehicle Name</th>
+            <th>Vehicle Abbreviation</th>
+            <th> </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model.vehicleModels)
+        {
+            <tr>
+                <td> @vehicle.Id</td>
+                <td> @vehicle.MakeId</td>
+                <td> @vehicle.VehicleName</td>
+                <td> @vehicle.VehicleAbrv</td>
+                <td><a href="VehicleModels/View/@vehicle.Id">View</a> </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>

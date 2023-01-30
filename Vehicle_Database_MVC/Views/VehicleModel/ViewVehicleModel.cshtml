@@ -1,0 +1,29 @@
+﻿@model Vehicle_Database_MVC.Models.UpdateVehicleModelViewModel
+
+@{
+}
+
+<h1>Edit a vehicle model</h1>
+<form method="post" action="ViewVehicleModel" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Make Id</label>
+        <input type="text" class="form-control" asp-for="MakeId" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Vehicle Name</label>
+        <input type="text" class="form-control" asp-for="VehicleName">
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Vehicle Abbreviation</label>
+        <input type="text" class="form-control" asp-for="VehicleAbrv">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-danger" asp-action="Delete"
+    asp-controller="VehicleModels">Delete</button>
+</form> 
