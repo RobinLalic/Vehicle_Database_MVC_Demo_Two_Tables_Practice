@@ -1,4 +1,4 @@
-﻿@*@model Vehicle_Database_MVC.Models.UpdateVehicleMakeViewModel
+﻿@model Vehicle_Database_MVC.Models.UpdateVehicleMakeViewModel
 
 @{
 }
@@ -23,60 +23,3 @@
     <button type="submit" class="btn btn-danger" asp-action="Delete"
     asp-controller="VehicleMakes">Delete</button>
 </form> 
-*@
-
-@model CombinedViewModel
-
-@{
-}
-
-<h1>Edit a vehicle make</h1>
-
-<form method="post" action="View" class="mt-5">
-    @foreach(var vehicle in Model.vehicleMakes){
-    <div class="mb-3">
-        <label for="" class="form-label">Id</label>
-        <input type="text" class="form-control" asp-for="@vehicle.Id" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Vehicle Name</label>
-        <input type="text" class="form-control" asp-for="@vehicle.VehicleName">
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">Vehicle Abbreviation</label>
-        <input type="text" class="form-control" asp-for="@vehicle.VehicleAbrv">
-    </div>
-    }
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <button type="submit" class="btn btn-danger" asp-action="Delete"
-            asp-controller="VehicleModels"> Delete </button>
-</form>
-
-<h1>Edit a vehicle model</h1>
-
-<form method="post" action="View class="mt-5">
-    @foreach (var vehicle in Model.vehicleModels)
-    {
-        <div class="mb-3">
-            <label for="" class="form-label">Id</label>
-            <input type="text" class="form-control" asp-for="@vehicle.Id" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Make Id</label>
-            <input type="text" class="form-control" asp-for="@vehicle.MakeId" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Vehicle Name</label>
-            <input type="text" class="form-control" asp-for="@vehicle.VehicleName">
-        </div>
-
-        <div class="mb-3">
-            <label for="" class="form-label">Vehicle Abbreviation</label>
-            <input type="text" class="form-control" asp-for="@vehicle.VehicleAbrv">
-        </div>   
-    }
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <button type="submit" class="btn btn-danger" asp-action="Delete"
-            asp-controller="VehicleModels"> Delete </button>
-</form>

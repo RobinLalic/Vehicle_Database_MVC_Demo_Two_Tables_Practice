@@ -17,112 +17,64 @@ namespace Vehicle_Database_MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = new CombinedViewModel();
-            model.vehicleMakes = await vehicleDbContext.Makes.ToListAsync();
-            model.vehicleModels = await vehicleDbContext.Models.ToListAsync();
-            //var makes = await vehicleDbContext.Makes.ToListAsync();
-            return View(model);
+            var makes = await vehicleDbContext.Makes.ToListAsync();
+            return View(makes);
         }
         public IActionResult Add()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Add(AddVehicleMakeViewModel addVehicleMake, AddVehicleModelViewModel addVehicleModel)
+        public async Task<IActionResult> Add(AddVehicleMakeViewModel addVehicleMake)
         {
-            var vehicleMake = new VehicleMake()
+            var vehicle = new VehicleMake()
             {
                 VehicleName = addVehicleMake.VehicleName,
                 VehicleAbrv = addVehicleMake.VehicleAbrv
             };
-            var vehicleModel = new VehicleModel()
-            {
-                VehicleName = addVehicleModel.VehicleName,
-                VehicleAbrv = addVehicleModel.VehicleAbrv
-            };
-            await vehicleDbContext.Makes.AddAsync(vehicleMake);
-            await vehicleDbContext.Models.AddAsync(vehicleModel);
+            await vehicleDbContext.Makes.AddAsync(vehicle);
             await vehicleDbContext.SaveChangesAsync();
             return RedirectToAction("Add");
 
 
         }
         [HttpGet]
-        public async Task<IActionResult> View(int vehicleMakeId)
+        public async Task<IActionResult> View(int id)
         {
-            var make = await vehicleDbContext.Makes.FirstOrDefaultAsync(x => x.Id == vehicleMakeId);
+            var make = await vehicleDbContext.Makes.FirstOrDefaultAsync(x => x.Id == id);
             if (make != null)
             {
 
-                var viewMake = new UpdateVehicleMakeViewModel()
+                var viewModel = new UpdateVehicleMakeViewModel()
                 {
                     Id = make.Id,
                     VehicleName = make.VehicleName,
                     VehicleAbrv = make.VehicleAbrv
                 };
-
-                return await Task.Run(() => View("View", viewMake));
+                return await Task.Run(() => View("View", viewModel));
             }
             return RedirectToAction("Index");
         }
-    
-        [HttpGet]
-        public async Task<IActionResult> ViewModel(int vehicleModelId)
-        {
-            var model = await vehicleDbContext.Models.FirstOrDefaultAsync(x => x.Id == vehicleModelId);
-            if (model != null)
-            {
-                var viewModel = new UpdateVehicleModelViewModel()
-            {
-                Id = model.Id,
-                MakeId = model.Id,
-                VehicleName = model.VehicleName,
-                VehicleAbrv = model.VehicleAbrv
-            };
-            return await Task.Run(() => View("ViewModel", viewModel));
-        }
-        return RedirectToAction("Index");
-    }
-
-        
-
         [HttpPost]
-            public async Task<IActionResult> View(UpdateVehicleMakeViewModel makeViewModel, UpdateVehicleModelViewModel modelViewModel)
+        public async Task<IActionResult> View(UpdateVehicleMakeViewModel model)
         {
-            var vehicleMake = await vehicleDbContext.Makes.FindAsync(makeViewModel.Id);
-            var vehicleModel = await vehicleDbContext.Models.FindAsync(makeViewModel.Id);
-               
+            var vehicleMake = await vehicleDbContext.Makes.FindAsync(model.Id);
             if (vehicleMake != null)
             {
-                vehicleMake.VehicleName= makeViewModel.VehicleName;
-                vehicleMake.VehicleAbrv= makeViewModel.VehicleAbrv;
+                vehicleMake.VehicleName = model.VehicleName;
+                vehicleMake.VehicleAbrv = model.VehicleAbrv;
                 await vehicleDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            if (vehicleModel != null)
-            {
-                vehicleModel.VehicleName = modelViewModel.VehicleName;
-                vehicleModel.VehicleAbrv = modelViewModel.VehicleAbrv;
-                await vehicleDbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(UpdateVehicleMakeViewModel makeViewModel, UpdateVehicleModelViewModel modelViewModel)
+        public async Task<IActionResult> Delete(UpdateVehicleMakeViewModel model)
         {
-            var vehicleMake = await vehicleDbContext.Makes.FindAsync(makeViewModel.Id);
-            var vehicleModel = await vehicleDbContext.Models.FindAsync(modelViewModel.Id);
+            var vehicleMake = await vehicleDbContext.Makes.FindAsync(model.Id);
             if (vehicleMake != null)
             {
                 vehicleDbContext.Makes.Remove(vehicleMake);
-                await vehicleDbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            if (vehicleModel != null)
-            {
-                vehicleDbContext.Models.Remove(vehicleModel);
                 await vehicleDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

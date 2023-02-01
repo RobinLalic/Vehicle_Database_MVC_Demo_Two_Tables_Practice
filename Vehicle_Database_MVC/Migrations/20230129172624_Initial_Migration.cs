@@ -37,6 +37,12 @@ namespace VehicleDatabaseMVC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Models", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Makes_MakesId",
+                        column: x => x.MakeId,
+                        principalTable: "Makes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
         }
 

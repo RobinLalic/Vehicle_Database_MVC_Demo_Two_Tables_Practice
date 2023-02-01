@@ -1,4 +1,5 @@
-﻿using Vehicle_Database_MVC.Models.Domain;
+﻿using Vehicle_Database_MVC.Controllers;
+using Vehicle_Database_MVC.Models.Domain;
 
 namespace Vehicle_Database_MVC
 {
@@ -7,5 +8,7 @@ namespace Vehicle_Database_MVC
 
         public IEnumerable<VehicleMake> vehicleMakes{ get; set; }
         public IEnumerable<VehicleModel> vehicleModels   { get; set; }
+        public string VehicleName { get; set; }
+        public string VehicleAbrv { get; set; }
     }
 }
