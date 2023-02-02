@@ -8,7 +8,5 @@ namespace Vehicle_Database_MVC
 
         public IEnumerable<VehicleMake> vehicleMakes{ get; set; }
         public IEnumerable<VehicleModel> vehicleModels   { get; set; }
-        public string VehicleName { get; set; }
-        public string VehicleAbrv { get; set; }
     }
 }
